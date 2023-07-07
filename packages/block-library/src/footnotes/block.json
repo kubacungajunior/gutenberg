@@ -5,13 +5,19 @@
 	"title": "Footnotes",
 	"category": "text",
 	"description": "",
-	"keywords": [ "references" ],
+	"keywords": [
+		"references"
+	],
 	"textdomain": "default",
-	"usesContext": [ "postId", "postType" ],
+	"usesContext": [
+		"postId",
+		"postType"
+	],
 	"supports": {
 		"html": false,
 		"multiple": false,
 		"reusable": false
 	},
-	"style": "wp-block-footnotes"
+	"editorScript": "file:./editor.min.js",
+	"editorStyle": "file:./editor.css"
 }
