@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Enahncement
+
+-   Support Typescript 5 and 5.1 by updating both `@typescript-eslint/parser` and `@typescript-eslint/eslint-plugin` to version `^5.62.0`.
+
 ## 14.10.0 (2023-07-05)
 
 ## 14.9.0 (2023-06-23)
