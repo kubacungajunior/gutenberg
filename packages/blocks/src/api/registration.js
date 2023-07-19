@@ -534,6 +534,13 @@ export function getBootstrappedBlockTypes() {
 	return select( blocksStore ).getBootstrappedBlockTypes();
 }
 
+export async function loadBlockTypes() {
+	await Promise.all(
+		getBootstrappedBlockTypes().map( ( { name } ) => loadBlockType( name ) )
+	);
+	return getBlockTypes();
+}
+
 /**
  * Returns the block support value for a feature, if defined.
  *

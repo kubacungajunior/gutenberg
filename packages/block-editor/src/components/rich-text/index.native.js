@@ -315,16 +315,17 @@ function RichTextWrapper(
 	);
 
 	const onEnter = useCallback(
-		( { value, onChange, shiftKey } ) => {
+		async ( { value, onChange, shiftKey } ) => {
 			const canSplit = onReplace && onSplit;
 
 			if ( onReplace ) {
-				const transforms = getBlockTransforms( 'from' ).filter(
-					( { type } ) => type === 'enter'
+				const transforms = await getBlockTransforms( 'from' );
+				const enterTransforms = transforms.filter(
+					( t ) => t.type === 'enter'
 				);
-				const transformation = findTransform( transforms, ( item ) => {
-					return item.regExp.test( value.text );
-				} );
+				const transformation = findTransform( enterTransforms, ( t ) =>
+					t.regExp.test( value.text )
+				);
 
 				if ( transformation ) {
 					onReplace( [
@@ -528,7 +529,7 @@ function RichTextWrapper(
 	);
 
 	const inputRule = useCallback(
-		( value, valueToFormat ) => {
+		async ( value, valueToFormat ) => {
 			if ( ! onReplace ) {
 				return;
 			}
@@ -545,14 +546,12 @@ function RichTextWrapper(
 			}
 
 			const trimmedTextBefore = text.slice( 0, startPosition ).trim();
-			const prefixTransforms = getBlockTransforms( 'from' ).filter(
-				( { type } ) => type === 'prefix'
-			);
+			const prefixTransforms = (
+				await getBlockTransforms( 'from' )
+			 ).filter( ( { type } ) => type === 'prefix' );
 			const transformation = findTransform(
 				prefixTransforms,
-				( { prefix } ) => {
-					return trimmedTextBefore === prefix;
-				}
+				( { prefix } ) => trimmedTextBefore === prefix
 			);
 
 			if ( ! transformation ) {

@@ -149,13 +149,13 @@ export function onFilesDrop(
 	canInsertBlockType,
 	insertOrReplaceBlocks
 ) {
-	return ( files ) => {
+	return async ( files ) => {
 		if ( ! hasUploadPermissions ) {
 			return;
 		}
 
 		const transformation = findTransform(
-			getBlockTransforms( 'from' ),
+			await getBlockTransforms( 'from' ),
 			( transform ) =>
 				transform.type === 'files' &&
 				canInsertBlockType( transform.blockName, targetRootClientId ) &&

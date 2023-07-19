@@ -14,6 +14,7 @@ export {
 	getBlockTransforms,
 	findTransform,
 	getBlockFromExample,
+	getTransformItemsForBlocks,
 } from './factory';
 
 // The block tree is composed of a collection of block nodes. Blocks contained
@@ -123,6 +124,7 @@ export {
 	getBlockType,
 	loadBlockType,
 	getBlockTypes,
+	loadBlockTypes,
 	getBlockSupport,
 	hasBlockSupport,
 	getBlockVariations,

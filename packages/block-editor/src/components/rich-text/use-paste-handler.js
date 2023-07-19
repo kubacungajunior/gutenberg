@@ -48,7 +48,7 @@ export function usePasteHandler( props ) {
 	const propsRef = useRef( props );
 	propsRef.current = props;
 	return useRefEffect( ( element ) => {
-		function _onPaste( event ) {
+		async function _onPaste( event ) {
 			const {
 				isSelected,
 				disableFormats,
@@ -173,7 +173,7 @@ export function usePasteHandler( props ) {
 				files?.length &&
 				! shouldDismissPastedFiles( files, html, plainText )
 			) {
-				const fromTransforms = getBlockTransforms( 'from' );
+				const fromTransforms = await getBlockTransforms( 'from' );
 				const blocks = files
 					.reduce( ( accumulator, file ) => {
 						const transformation = findTransform(

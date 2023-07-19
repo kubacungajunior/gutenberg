@@ -29,7 +29,7 @@ import { getValueFromObjectPath } from './utils';
  */
 const getNormalizedBlockType = ( state, nameOrType ) =>
 	'string' === typeof nameOrType
-		? getBlockType( state, nameOrType )
+		? getBootstrappedBlockType( state, nameOrType )
 		: nameOrType;
 
 /**

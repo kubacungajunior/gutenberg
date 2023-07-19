@@ -3,8 +3,9 @@
  */
 import { getBlockTransforms } from '../factory';
 
-export function getRawTransforms() {
-	return getBlockTransforms( 'from' )
+export async function getRawTransforms() {
+	const transforms = getBlockTransforms( 'from' );
+	return transforms
 		.filter( ( { type } ) => type === 'raw' )
 		.map( ( transform ) => {
 			return transform.isMatch

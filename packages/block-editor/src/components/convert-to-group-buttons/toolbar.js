@@ -20,8 +20,13 @@ const layouts = {
 };
 
 function BlockGroupToolbar() {
-	const { blocksSelection, clientIds, groupingBlockName, isGroupable } =
-		useConvertToGroupButtonProps();
+	const {
+		blocksSelection,
+		clientIds,
+		groupingBlockName,
+		isGroupable,
+		reasons,
+	} = useConvertToGroupButtonProps();
 	const { replaceBlocks } = useDispatch( blockEditorStore );
 
 	const { canRemove, variations } = useSelect(
@@ -40,15 +45,11 @@ function BlockGroupToolbar() {
 		[ clientIds, groupingBlockName ]
 	);
 
-	const onConvertToGroup = ( layout ) => {
-		const newBlocks = switchToBlockType(
+	const onConvertToGroup = async ( layout ) => {
+		const newBlocks = await switchToBlockType(
 			blocksSelection,
 			groupingBlockName
 		);
-
-		if ( typeof layout !== 'string' ) {
-			layout = 'group';
-		}
 
 		if ( newBlocks && newBlocks.length > 0 ) {
 			// Because the block is not in the store yet we can't use
@@ -69,10 +70,10 @@ function BlockGroupToolbar() {
 		return null;
 	}
 
-	const canInsertRow = !! variations.find(
+	const canInsertRow = variations?.some(
 		( { name } ) => name === 'group-row'
 	);
-	const canInsertStack = !! variations.find(
+	const canInsertStack = variations?.some(
 		( { name } ) => name === 'group-stack'
 	);
 
@@ -81,7 +82,7 @@ function BlockGroupToolbar() {
 			<ToolbarButton
 				icon={ group }
 				label={ _x( 'Group', 'verb' ) }
-				onClick={ onConvertToGroup }
+				onClick={ () => onConvertToGroup( 'group' ) }
 			/>
 			{ canInsertRow && (
 				<ToolbarButton
