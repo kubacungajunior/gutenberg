@@ -240,11 +240,13 @@ export function registerBlockType( blockNameOrMetadata, settings ) {
 		}
 	} catch {}
 
-	if ( isObject( blockNameOrMetadata ) ) {
-		unstable__bootstrapServerSideBlockDefinitions( {
-			[ name ]: getBlockSettingsFromMetadata( blockNameOrMetadata ),
-		} );
-	}
+	const metadata = isObject( blockNameOrMetadata )
+		? getBlockSettingsFromMetadata( blockNameOrMetadata )
+		: getBlockSettingsFromMetadata( settings );
+
+	unstable__bootstrapServerSideBlockDefinitions( {
+		[ name ]: metadata,
+	} );
 
 	const blockType = {
 		name,

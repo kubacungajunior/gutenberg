@@ -195,7 +195,7 @@ export function useEntityBlockEditor( kind, name, { id: _id } = {} ) {
 		return () => {
 			mounted = false;
 		};
-	}, [ blocks, editedBlocks, content ] );
+	}, [ editedBlocks, content ] );
 
 	const updateFootnotes = useCallback(
 		( _blocks ) => {

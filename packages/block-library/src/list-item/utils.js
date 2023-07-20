@@ -20,15 +20,19 @@ export function createListItem( listItemAttributes, listAttributes, children ) {
 	);
 }
 
-function convertBlockToList( block ) {
-	const list = switchToBlockType( block, listName );
-	if ( list ) return list;
-	const paragraph = switchToBlockType( block, paragraphName );
-	if ( paragraph ) return switchToBlockType( paragraph, listName );
+async function convertBlockToList( block ) {
+	const list = await switchToBlockType( block, listName );
+	if ( list ) {
+		return list;
+	}
+	const paragraph = await switchToBlockType( block, paragraphName );
+	if ( paragraph ) {
+		return await switchToBlockType( paragraph, listName );
+	}
 	return null;
 }
 
-export function convertToListItems( blocks ) {
+export async function convertToListItems( blocks ) {
 	const listItems = [];
 
 	for ( let block of blocks ) {
@@ -36,7 +40,7 @@ export function convertToListItems( blocks ) {
 			listItems.push( block );
 		} else if ( block.name === listName ) {
 			listItems.push( ...block.innerBlocks );
-		} else if ( ( block = convertBlockToList( block ) ) ) {
+		} else if ( ( block = await convertBlockToList( block ) ) ) {
 			for ( const { innerBlocks } of block ) {
 				listItems.push( ...innerBlocks );
 			}

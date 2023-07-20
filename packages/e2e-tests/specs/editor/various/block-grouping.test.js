@@ -45,7 +45,7 @@ describe( 'Block Grouping', () => {
 	} );
 
 	describe( 'Group creation', () => {
-		it.only( 'creates a group from multiple blocks of the same type via block transforms', async () => {
+		it( 'creates a group from multiple blocks of the same type via block transforms', async () => {
 			// Creating test blocks.
 			await insertBlocksOfSameType();
 

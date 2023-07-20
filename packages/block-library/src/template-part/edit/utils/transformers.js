@@ -94,7 +94,7 @@ async function switchLegacyWidgetType( block ) {
 		return undefined;
 	}
 
-	return switchToBlockType( block, transforms[ 0 ].name );
+	return await switchToBlockType( block, transforms[ 0 ].name );
 }
 
 function transformInnerBlocks( innerBlocks = [] ) {

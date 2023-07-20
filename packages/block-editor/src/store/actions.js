@@ -697,7 +697,7 @@ export const synchronizeTemplate =
  */
 export const __unstableDeleteSelection =
 	( isForward ) =>
-	( { registry, select, dispatch } ) => {
+	async ( { registry, select, dispatch } ) => {
 		const selectionAnchor = select.getSelectionStart();
 		const selectionFocus = select.getSelectionEnd();
 
@@ -798,7 +798,10 @@ export const __unstableDeleteSelection =
 		const blocksWithTheSameType =
 			blockA.name === blockB.name
 				? [ followingBlock ]
-				: switchToBlockType( followingBlock, targetBlockType.name );
+				: await switchToBlockType(
+						followingBlock,
+						targetBlockType.name
+				  );
 
 		// If the block types can not match, do nothing
 		if ( ! blocksWithTheSameType || ! blocksWithTheSameType.length ) {
@@ -1003,7 +1006,7 @@ export const __unstableExpandSelection =
  */
 export const mergeBlocks =
 	( firstBlockClientId, secondBlockClientId ) =>
-	( { registry, select, dispatch } ) => {
+	async ( { registry, select, dispatch } ) => {
 		const blocks = [ firstBlockClientId, secondBlockClientId ];
 		dispatch( { type: 'MERGE_BLOCKS', blocks } );
 
@@ -1018,7 +1021,7 @@ export const mergeBlocks =
 		if ( blockAType && ! blockAType.merge ) {
 			// If there's no merge function defined, attempt merging inner
 			// blocks.
-			const blocksWithTheSameType = switchToBlockType(
+			const blocksWithTheSameType = await switchToBlockType(
 				blockB,
 				blockAType.name
 			);
@@ -1102,7 +1105,7 @@ export const mergeBlocks =
 		const blocksWithTheSameType =
 			blockA.name === blockB.name
 				? [ cloneB ]
-				: switchToBlockType( cloneB, blockA.name );
+				: await switchToBlockType( cloneB, blockA.name );
 
 		// If the block types can not match, do nothing.
 		if ( ! blocksWithTheSameType || ! blocksWithTheSameType.length ) {

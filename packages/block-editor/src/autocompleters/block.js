@@ -5,6 +5,7 @@ import { useSelect } from '@wordpress/data';
 import {
 	createBlock,
 	createBlocksFromInnerBlocksTemplate,
+	loadBlockType,
 } from '@wordpress/blocks';
 import { useMemo } from '@wordpress/element';
 
@@ -115,8 +116,9 @@ function createBlockCompleter() {
 		allowContext( before, after ) {
 			return ! ( /\S/.test( before ) || /\S/.test( after ) );
 		},
-		getOptionCompletion( inserterItem ) {
+		async getOptionCompletion( inserterItem ) {
 			const { name, initialAttributes, innerBlocks } = inserterItem;
+			await loadBlockType( name );
 			return {
 				action: 'replace',
 				value: createBlock(

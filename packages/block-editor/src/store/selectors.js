@@ -2145,31 +2145,21 @@ export const getBlockTransformItems = createSelector(
  *
  * @return {boolean} Items that appear in inserter.
  */
-export const hasInserterItems = createRegistrySelector(
-	( select ) =>
-		( state, rootClientId = null ) => {
-			const { getBlockNames, getBootstrappedBlockType } =
-				select( blocksStore );
-			const hasBlockType = getBlockNames().some( ( blockName ) => {
-				return canIncludeBlockTypeInInserter(
-					state,
-					getBootstrappedBlockType( blockName ),
-					rootClientId
-				);
-			} );
-			if ( hasBlockType ) {
-				return true;
-			}
-			const hasReusableBlock =
-				canInsertBlockTypeUnmemoized(
-					state,
-					'core/block',
-					rootClientId
-				) && getReusableBlocks( state ).length > 0;
+export const hasInserterItems = ( state, rootClientId = null ) => {
+	const hasBlockType = getBootstrappedBlockTypes().some( ( blockType ) =>
+		canIncludeBlockTypeInInserter( state, blockType, rootClientId )
+	);
 
-			return hasReusableBlock;
-		}
-);
+	if ( hasBlockType ) {
+		return true;
+	}
+
+	const hasReusableBlock =
+		canInsertBlockTypeUnmemoized( state, 'core/block', rootClientId ) &&
+		getReusableBlocks( state ).length > 0;
+
+	return hasReusableBlock;
+};
 
 /**
  * Returns the list of allowed inserter blocks for inner blocks children.
