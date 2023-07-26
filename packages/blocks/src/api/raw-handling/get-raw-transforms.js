@@ -4,7 +4,7 @@
 import { getBlockTransforms } from '../factory';
 
 export async function getRawTransforms() {
-	const transforms = getBlockTransforms( 'from' );
+	const transforms = await getBlockTransforms( 'from' );
 	return transforms
 		.filter( ( { type } ) => type === 'raw' )
 		.map( ( transform ) => {

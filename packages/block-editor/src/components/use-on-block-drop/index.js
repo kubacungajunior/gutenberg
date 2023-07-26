@@ -186,8 +186,8 @@ export function onHTMLDrop(
 	targetBlockIndex,
 	insertOrReplaceBlocks
 ) {
-	return ( HTML ) => {
-		const blocks = pasteHandler( { HTML, mode: 'BLOCKS' } );
+	return async ( HTML ) => {
+		const blocks = await pasteHandler( { HTML, mode: 'BLOCKS' } );
 
 		if ( blocks.length ) {
 			insertOrReplaceBlocks( blocks );

@@ -232,7 +232,7 @@ export function usePasteHandler( props ) {
 				mode = 'BLOCKS';
 			}
 
-			const content = pasteHandler( {
+			const content = await pasteHandler( {
 				HTML: html,
 				plainText,
 				mode,

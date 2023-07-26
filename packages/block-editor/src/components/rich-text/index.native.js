@@ -379,7 +379,7 @@ function RichTextWrapper(
 	);
 
 	const onPaste = useCallback(
-		( {
+		async ( {
 			value,
 			onChange,
 			html,
@@ -412,7 +412,7 @@ function RichTextWrapper(
 			// Only process file if no HTML is present.
 			// Note: a pasted file may have the URL as plain text.
 			if ( files && files.length && ! html ) {
-				const content = pasteHandler( {
+				const content = await pasteHandler( {
 					HTML: filePasteHandler( files ),
 					mode: 'BLOCKS',
 					tagName,
@@ -463,7 +463,7 @@ function RichTextWrapper(
 				mode = 'BLOCKS';
 			}
 
-			const content = pasteHandler( {
+			const content = await pasteHandler( {
 				HTML: html,
 				plainText,
 				mode,

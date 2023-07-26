@@ -74,9 +74,7 @@ export function useInputRules( props ) {
 			 ).filter( ( { type } ) => type === 'prefix' );
 			const transformation = findTransform(
 				prefixTransforms,
-				( { prefix } ) => {
-					return trimmedTextBefore === prefix;
-				}
+				( { prefix } ) => trimmedTextBefore === prefix
 			);
 
 			if ( ! transformation ) {
@@ -95,7 +93,7 @@ export function useInputRules( props ) {
 			return true;
 		}
 
-		function onInput( event ) {
+		async function onInput( event ) {
 			const { inputType, type } = event;
 			const {
 				getValue,
@@ -109,8 +107,8 @@ export function useInputRules( props ) {
 				return;
 			}
 
-			if ( __unstableAllowPrefixTransformations && inputRule ) {
-				if ( inputRule() ) return;
+			if ( __unstableAllowPrefixTransformations ) {
+				if ( await inputRule() ) return;
 			}
 
 			const value = getValue();
