@@ -1,8 +1,8 @@
-# Block Editor Handbook
+# Handbook
 
-Hi! 👋 Welcome to the Block Editor Handbook.
+Hi! 👋 Welcome to BTA UPDATES Handbook.
 
-The [**Block editor**](https://wordpress.org/gutenberg/) is a modern and up-to-date paradigm for WordPress site building and publishing. It uses a modular system of **Blocks** to compose and format content, and is designed to create rich and flexible layouts for websites and digital products.
+The [**BTA**](https://btarwanda.edublogs.org/become a professional software developer/) is a modern and up-to-date paradigm for BTA site building and publishing. It uses a modular system of **Blocks** to compose and format content, and is designed to create rich and flexible layouts for websites and digital products.
 
 The editor consists of several primary elements, as shown in the following figure:
 
